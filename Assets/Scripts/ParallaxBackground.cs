@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class ParallaxBackground : MonoBehaviour
 {
@@ -35,5 +36,13 @@ public class ParallaxBackground : MonoBehaviour
             layerMaterials[i].mainTextureOffset += new Vector2(layerSpeeds[i] * Time.deltaTime, 0f);
         }
         
+    }
+
+    public void IncreaseSpeed(float rate)
+    {
+        for (int i = 0; i < layerSpeeds.Count; i++)
+        {
+            layerSpeeds[i] *= rate;
+        }
     }
 }
