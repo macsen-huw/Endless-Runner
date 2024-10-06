@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class GameLogic : MonoBehaviour
 {
@@ -34,12 +34,23 @@ public class GameLogic : MonoBehaviour
     public float yOffset;
     private float snowmanSpawnTime;
 
+    [Header("Score")]
+    public Text scoreText;
+    public float scoreMultiplier;
+    private float score;
+    private int highScore;
 
+    [Header("Death Screen")]
+    public DeathScreen deathScreen;
     
     // Start is called before the first frame update
     void Start()
     {
+        //When starting after death, the time scale is 1
+        Time.timeScale = 1;
 
+        //At the beginning, the score is 0
+        score = 0;
     }
 
     // Update is called once per frame
@@ -70,6 +81,12 @@ public class GameLogic : MonoBehaviour
         //Update jump force value (if it's been changed)
         if (player.jumpForce != jumpForce)
             player.setJumpForce(jumpForce);
+
+        //Update the score
+        score += (Time.deltaTime * scoreMultiplier);
+        //Convert the score to integer to display nicely
+        scoreText.text = Mathf.FloorToInt(score).ToString();
+
     }
 
     private void SpawnSnowman()
@@ -82,7 +99,12 @@ public class GameLogic : MonoBehaviour
     }
     public void Death()
     {
-        print("Died!");
+        deathScreen.Death();
+    }
+
+    public int GetScore()
+    {
+        return Mathf.FloorToInt(score);
     }
 
 
