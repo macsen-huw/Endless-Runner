@@ -31,6 +31,9 @@ public class GameLogic : MonoBehaviour
     public float minimumSpawnTime;
     public float maximumSpawnTime;
 
+    public float secondsToDecrease;
+    private float snowmanDistanceDecreaseTime;
+
     public float yOffset;
     private float snowmanSpawnTime;
 
@@ -38,7 +41,6 @@ public class GameLogic : MonoBehaviour
     public Text scoreText;
     public float scoreMultiplier;
     private float score;
-    private int highScore;
 
     [Header("Death Screen")]
     public DeathScreen deathScreen;
@@ -51,6 +53,8 @@ public class GameLogic : MonoBehaviour
 
         //At the beginning, the score is 0
         score = 0;
+
+        snowmanDistanceDecreaseTime = secondsToDecrease;
     }
 
     // Update is called once per frame
@@ -76,6 +80,16 @@ public class GameLogic : MonoBehaviour
 
             //Speed up the background too
             parallaxBackground.IncreaseSpeed(increaseRate);
+        }
+
+        if(Time.time > snowmanDistanceDecreaseTime)
+        {
+            if (maximumSpawnTime > 1.5)
+            {
+                maximumSpawnTime *= 0.85f;
+            }
+
+            snowmanDistanceDecreaseTime = Time.time + secondsToDecrease;
         }
 
         //Update jump force value (if it's been changed)

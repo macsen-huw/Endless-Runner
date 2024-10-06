@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,13 +8,13 @@ using UnityEngine.UI;
 public class DeathScreen : MonoBehaviour
 {
     private GameLogic gameManager;
-    private bool isDead;
     public Text scoreText;
     public Text highScoreText;
 
+    public GameObject scoreCanvas;
+
     private void Start()
     {
-        isDead = false;
         this.gameObject.SetActive(false);
 
         gameManager = GameObject.FindWithTag("GameController").GetComponent<GameLogic>();
@@ -23,8 +24,6 @@ public class DeathScreen : MonoBehaviour
     {
         //Stop the game
         Time.timeScale = 0f;
-
-        isDead = true;
 
         //Check whether the user has a new high score
         int currentScore = gameManager.GetScore();
@@ -43,12 +42,21 @@ public class DeathScreen : MonoBehaviour
 
         //Display the death screen
         this.gameObject.SetActive(true);
+
+        //Remove the old score text
+        scoreCanvas.SetActive(false);
     }
 
     //Play again
     public void Replay()
     {
         SceneManager.LoadScene("MainScene");
+    }
+
+    //Back to Main Menu
+    public void Quit()
+    {
+        SceneManager.LoadScene("StartMenu");
     }
 
 

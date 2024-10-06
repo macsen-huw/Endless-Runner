@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class Obstacle : MonoBehaviour
 {
@@ -17,8 +18,9 @@ public class Obstacle : MonoBehaviour
     {
         //Check whether the obstacle has hit the player
         //If so, the game is over
-        if (collision.tag == "Player") 
+        if (collision.tag == "Player")
             gameManager.Death();
+        
 
         //If it's hit the outer border, despawn
         if (collision.tag == "Offscreen")
