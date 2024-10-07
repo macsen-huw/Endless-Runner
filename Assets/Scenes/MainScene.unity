@@ -1937,7 +1937,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 42
-  jumpVolume: 0.8
+  jumpVolume: 0.5
 --- !u!82 &1756265619
 AudioSource:
   m_ObjectHideFlags: 0
